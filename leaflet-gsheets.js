@@ -12,12 +12,12 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US
-var map = L.map("map").setView([25, 0], 2.5);
+var map = L.map("map").setView([39, -98], 5);
 
 // basemap
-var CartoDB_Voyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
+var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
+	attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
+	minZoom: 1,
 	maxZoom: 19
 }).addTo(map);
 
@@ -35,17 +35,23 @@ function addPoints(data) {
       pointGroupLayer
     );
 
+    // variables for popups
+    var location = data[row].Location || 'Not listed'
+    var addy = data[row].Address || 'Not listed'
+    var phone = data[row].Phone || 'Not listed'
+    var hours = data[row].Hours || 'Not listed'
+
     // POPUPS
-    marker.bindPopup('<h3 style="margin:0 0 3px 0;">' + data[row].Location + '</h3>' + 'Address: ' + data[row].Address + '<br/>Phone:' + '<a href="tel:' + data[row].Phone + '">' + data[row].Phone + '"'</a>"' + <br/>Hours: ' + data[row].Hours);
+    marker.bindPopup('<h3 style="margin:0 0 3px 0;">' + location + '</h3>' + 'Address: ' + addy + '<br/>Phone: <a href="tel:' + phone + '">' + phone + '</a>' + '<br/>Hours: ' + hours);
 
     var companyIcon = L.Icon.extend({
         options: {
-            iconSize: [28, 24],
+            iconSize: [30, 30],
         }
     });
     var logoIcon = new companyIcon(
         //{ iconUrl: data[row].Logo || 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/microsoft/209/briefcase_1f4bc.png' });
-        { iconUrl: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/241/test-tube_1f9ea.png' });
+        { iconUrl: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/emojipedia/132/test-tube_1f9ea.png' });
 
     marker.setIcon(logoIcon);
   }
