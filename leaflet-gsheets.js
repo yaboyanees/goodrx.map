@@ -5,7 +5,7 @@
 
 // init() is called as soon as the page loads
 function init() {
-  var pointsURL = "https://docs.google.com/spreadsheets/d/1MvtG-2QBoLvjr3QSmvQKNsZ5eM82JoGJtzn0VAL_54k/edit?usp=sharing";
+  var pointsURL = "https://docs.google.com/spreadsheets/d/1kIIw9GAvZ1oiKrkii8eT6j_mi_KFgnVLF3b0kRvaLl8/edit?usp=sharing";
 
   Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
 }
@@ -36,7 +36,7 @@ function addPoints(data) {
     );
 
     // POPUPS
-    marker.bindPopup('<h4 style="margin:0 0 3px 0;"><a href="' + data[row].ApplyLink + '">' + data[row].Company + '</a></h4>(' + data[row].Locations + ')<br/><br/>Hiring:' + data[row].Roles);
+    marker.bindPopup('<h3 style="margin:0 0 3px 0;">' + data[row].Location + '</h3>' + 'Address: ' + data[row].Address + '<br/>Phone:' + '<a href="tel:' + data[row].Phone + '">' + data[row].Phone + '"'</a>"' + <br/>Hours: ' + data[row].Hours);
 
     var companyIcon = L.Icon.extend({
         options: {
@@ -44,7 +44,8 @@ function addPoints(data) {
         }
     });
     var logoIcon = new companyIcon(
-        { iconUrl: data[row].Logo || 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/microsoft/209/briefcase_1f4bc.png' });
+        //{ iconUrl: data[row].Logo || 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/microsoft/209/briefcase_1f4bc.png' });
+        { iconUrl: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/241/test-tube_1f9ea.png' });
 
     marker.setIcon(logoIcon);
   }
